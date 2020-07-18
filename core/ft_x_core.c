@@ -1,24 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
+/*   ft_x_core.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kcorazon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/05/08 10:32:40 by kcorazon          #+#    #+#             */
-/*   Updated: 2020/05/08 10:32:41 by kcorazon         ###   ########.fr       */
+/*   Created: 2020/06/24 11:37:49 by kcorazon          #+#    #+#             */
+/*   Updated: 2020/06/24 11:37:51 by kcorazon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "includes/ft_printf.h"
+#include "libft/libft.h"
 
-void	ft_putnbr_fd(long int n, int fd)
+void 	ft_write_x(va_list arg, bool is_upper)
 {
-	if (n < 0)
-		ft_putchar_fd('-', fd);
-	else
-		n *= -1;
-	if (n <= -10)
-		ft_putnbr_fd(n / 10 * (-1), fd);
-	ft_putchar_fd((char)(n % 10 * (-1) + '0'), fd);
+	int	x;
+
+	x = va_arg(arg, int);
+	ft_putnbr_base_fd(x, 16, is_upper, 1);
 }

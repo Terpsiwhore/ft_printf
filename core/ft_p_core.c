@@ -18,5 +18,6 @@ void 	ft_write_p(va_list arg)
 	size_t	p;
 
 	p = va_arg(arg, size_t);
-	ft_putnbr_fd(p, 16, 1);
+	ft_putstr_fd("0x", 1);
+	ft_putnbr_base_fd(p, 16, 0, 1);
 }

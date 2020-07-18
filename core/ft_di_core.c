@@ -1,24 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
+/*   ft_di_core.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kcorazon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/05/08 10:32:40 by kcorazon          #+#    #+#             */
-/*   Updated: 2020/05/08 10:32:41 by kcorazon         ###   ########.fr       */
+/*   Created: 2020/06/24 09:13:29 by kcorazon          #+#    #+#             */
+/*   Updated: 2020/06/24 09:13:30 by kcorazon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "includes/ft_printf.h"
+#include "libft/libft.h"
 
-void	ft_putnbr_fd(long int n, int fd)
+void 	ft_write_di(va_list arg)
 {
-	if (n < 0)
-		ft_putchar_fd('-', fd);
-	else
-		n *= -1;
-	if (n <= -10)
-		ft_putnbr_fd(n / 10 * (-1), fd);
-	ft_putchar_fd((char)(n % 10 * (-1) + '0'), fd);
+	int	i;
+
+	i = va_arg(arg, int);
+	ft_putnbr_fd(i, 1);
 }

@@ -15,6 +15,7 @@
 
 # include <stdlib.h>
 # include <unistd.h>
+# include <stdbool.h>
 
 typedef struct		s_list
 {
@@ -65,7 +66,8 @@ char				*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 void				ft_putchar_fd(char c, int fd);
 void				ft_putstr_fd(char *s, int fd);
 void				ft_putendl_fd(char *s, int fd);
-void				ft_putnbr_fd(int n, int fd);
+void				ft_putnbr_fd(long int n, int fd);
+void				ft_putnbr_base_fd(long long n, int base, bool is_alpha, int fd);
 
 /*
 **	BONUS

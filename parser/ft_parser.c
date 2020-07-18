@@ -33,6 +33,21 @@ int 	ft_parse_format(const char *str, va_list arg)
 		++i;
 		ft_write_p(arg);
 	}
+	else if (*str == 'd' || *str == 'i')
+	{
+		++i;
+		ft_write_di(arg);
+	}
+	else if (*str == 'u')
+	{
+		++i;
+		ft_write_u(arg);
+	}
+	else if (*str == 'X' || *str == 'x')
+	{
+		++i;
+		ft_write_x(arg, (*str == 'X' ? 1 : 0));
+	}
 	return (i);
 }
 
