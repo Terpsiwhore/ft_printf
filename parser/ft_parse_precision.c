@@ -1,33 +1,43 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_parser.c                                        :+:      :+:    :+:   */
+/*   ft_parse_precision.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kcorazon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/07/19 11:39:56 by kcorazon          #+#    #+#             */
-/*   Updated: 2020/07/19 11:39:58 by kcorazon         ###   ########.fr       */
+/*   Created: 2020/07/21 08:52:27 by kcorazon          #+#    #+#             */
+/*   Updated: 2020/07/21 08:52:30 by kcorazon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_parser.h"
 #include "libft.h"
 
-t_format_fields *ft_parser(const char *str, va_list *arg)
+int 	ft_parse_precision(const char *str, t_format_fields *format, va_list *arg)
 {
-	t_format_fields *format;
+	int	length;
+	int	precision;
 
-	if ((format = malloc(sizeof(t_format_fields))))
+	length = 0;
+	precision = 0;
+	if (str[length] == '.')
 	{
-		format->length = 0;
-		str += ft_parse_flags(str, format);
-		str += ft_parse_width(str, format, arg);
-		str += ft_parse_precision(str, format, arg);
-		if (ft_parse_type(str, format) == 0)
+		++length;
+		if (str[length] == '*')
 		{
-			free(format);
-			return (NULL);
+			format->precision = va_arg(*arg, int);
+			++length;
+		}
+		else
+		{
+			while (ft_isdigit(str[length]))
+			{
+				precision = precision * 10 + (str[length] - '0');
+				++length;
+			}
+			format->precision = precision;
 		}
 	}
-	return (format);
+	format->length += length;
+	return (length);
 }

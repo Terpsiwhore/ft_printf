@@ -1,33 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_parser.c                                        :+:      :+:    :+:   */
+/*   ft_parse_flags.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kcorazon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/07/19 11:39:56 by kcorazon          #+#    #+#             */
-/*   Updated: 2020/07/19 11:39:58 by kcorazon         ###   ########.fr       */
+/*   Created: 2020/07/21 08:08:43 by kcorazon          #+#    #+#             */
+/*   Updated: 2020/07/21 08:08:44 by kcorazon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_parser.h"
-#include "libft.h"
 
-t_format_fields *ft_parser(const char *str, va_list *arg)
+int ft_parse_flags(const char *str, t_format_fields *format)
 {
-	t_format_fields *format;
+	int length;
 
-	if ((format = malloc(sizeof(t_format_fields))))
+	length = 0;
+	format->flags = 0;
+	while (str[length])
 	{
-		format->length = 0;
-		str += ft_parse_flags(str, format);
-		str += ft_parse_width(str, format, arg);
-		str += ft_parse_precision(str, format, arg);
-		if (ft_parse_type(str, format) == 0)
-		{
-			free(format);
-			return (NULL);
-		}
+		if (str[length] == '-')
+			format->flags = format->flags | FLAG_MINU;
+		else if (str[length] == '0')
+			format->flags = format->flags | FLAG_ZERO;
+		else
+			break ;
+		++length;
 	}
-	return (format);
+	format->length += length;
+	return (length);
 }

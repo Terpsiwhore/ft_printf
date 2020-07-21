@@ -1,33 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_parser.c                                        :+:      :+:    :+:   */
+/*   ft_parse_width.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kcorazon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/07/19 11:39:56 by kcorazon          #+#    #+#             */
-/*   Updated: 2020/07/19 11:39:58 by kcorazon         ###   ########.fr       */
+/*   Created: 2020/07/21 08:28:06 by kcorazon          #+#    #+#             */
+/*   Updated: 2020/07/21 08:28:09 by kcorazon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_parser.h"
 #include "libft.h"
 
-t_format_fields *ft_parser(const char *str, va_list *arg)
+int 	ft_parse_width(const char *str, t_format_fields *format, va_list *arg)
 {
-	t_format_fields *format;
+	int				length;
+	unsigned int	width;
 
-	if ((format = malloc(sizeof(t_format_fields))))
+	length = 0;
+	width = 0;
+	if (*str == '*')
 	{
-		format->length = 0;
-		str += ft_parse_flags(str, format);
-		str += ft_parse_width(str, format, arg);
-		str += ft_parse_precision(str, format, arg);
-		if (ft_parse_type(str, format) == 0)
-		{
-			free(format);
-			return (NULL);
-		}
+		format->width = va_arg(*arg, int);
+		++format->length;
+		++length;
 	}
-	return (format);
+	else
+	{
+		while (ft_isdigit(str[length]))
+		{
+			width = width * 10 + (str[length] - '0');
+			++length;
+		}
+		format->width = width;
+	}
+	format->length += length;
+	return (length);
 }

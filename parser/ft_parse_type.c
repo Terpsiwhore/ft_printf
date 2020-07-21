@@ -1,33 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_parser.c                                        :+:      :+:    :+:   */
+/*   ft_parse_type.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kcorazon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/07/19 11:39:56 by kcorazon          #+#    #+#             */
-/*   Updated: 2020/07/19 11:39:58 by kcorazon         ###   ########.fr       */
+/*   Created: 2020/07/21 09:04:56 by kcorazon          #+#    #+#             */
+/*   Updated: 2020/07/21 09:04:58 by kcorazon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_parser.h"
 #include "libft.h"
 
-t_format_fields *ft_parser(const char *str, va_list *arg)
+int		ft_parse_type(const char *str, t_format_fields *format)
 {
-	t_format_fields *format;
+	char *types;
 
-	if ((format = malloc(sizeof(t_format_fields))))
+	types = "cspdiuxX%";
+	if (ft_strchr(types, *str))
 	{
-		format->length = 0;
-		str += ft_parse_flags(str, format);
-		str += ft_parse_width(str, format, arg);
-		str += ft_parse_precision(str, format, arg);
-		if (ft_parse_type(str, format) == 0)
-		{
-			free(format);
-			return (NULL);
-		}
+		format->type = *str;
+		++(format->length);
+		return (1);
 	}
-	return (format);
+	return (0);
 }
