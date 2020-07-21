@@ -1,22 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_di_core.c                                       :+:      :+:    :+:   */
+/*   ft_core_type_s.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kcorazon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/06/24 09:13:29 by kcorazon          #+#    #+#             */
-/*   Updated: 2020/06/24 09:13:30 by kcorazon         ###   ########.fr       */
+/*   Created: 2020/07/21 11:18:39 by kcorazon          #+#    #+#             */
+/*   Updated: 2020/07/21 11:18:42 by kcorazon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/ft_printf.h"
-#include "libft/libft.h"
+#include "ft_parser.h"
+#include "libft.h"
 
-void 	ft_write_di(va_list arg)
+int 	ft_print_type_s(t_format_fields *format, va_list *arg)
 {
-	int	i;
+	int		length;
+	char 	*s;
 
-	i = va_arg(arg, int);
-	ft_putnbr_fd(i, 1);
+	length = 0;
+	s = va_arg(*arg, char *);
+	if (s == NULL)
+		s = "(null)";
+	ft_putstr_fd(s, 1);
+
+	return (length);
 }

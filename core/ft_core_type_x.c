@@ -1,22 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_x_core.c                                        :+:      :+:    :+:   */
+/*   ft_core_type_x.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kcorazon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/06/24 11:37:49 by kcorazon          #+#    #+#             */
-/*   Updated: 2020/06/24 11:37:51 by kcorazon         ###   ########.fr       */
+/*   Created: 2020/07/21 11:30:31 by kcorazon          #+#    #+#             */
+/*   Updated: 2020/07/21 11:30:33 by kcorazon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/ft_printf.h"
-#include "libft/libft.h"
+#include "ft_parser.h"
+#include "libft.h"
 
-void 	ft_write_x(va_list arg, bool is_upper)
+int 	ft_print_type_x(t_format_fields *format, va_list *arg, bool is_upper)
 {
+	int length;
 	int	x;
 
-	x = va_arg(arg, int);
+	length = 0;
+	x = va_arg(*arg, int);
 	ft_putnbr_base_fd(x, 16, is_upper, 1);
+	return (length);
 }

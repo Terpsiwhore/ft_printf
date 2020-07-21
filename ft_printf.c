@@ -10,16 +10,41 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/ft_printf.h"
-#include "includes/ft_parser.h"
+#include "ft_printf.h"
+#include "ft_parser.h"
 
-int		ft_printf(const char *str, ...)
+static int 	ft_print_string_to_percent(const char *str)
 {
-	va_list	arg;
-	int		res;
+	int length;
+
+	length = 0;
+	while (str[length] && str[length] != '%')
+		++length;
+	write(1, str, length);
+	return (length);
+}
+
+int			ft_printf(const char *str, ...)
+{
+	va_list			arg;
+	t_format_fields *format;
+	int				length;
 
 	va_start(arg, str);
-	res = ft_parse_string(str, arg);
+	length = 0;
+	while (*str)
+	{
+		length = ft_print_string_to_percent(str);
+		str += length;
+		if (*str == '%')
+		{
+			++str;
+			if ((format = ft_parser(str, &arg)))
+			{
+				str += format->length;
+			}
+		}
+	}
 	va_end(arg);
-	return (res);
+	return (length);
 }

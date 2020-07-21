@@ -1,22 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_s_core.c                                        :+:      :+:    :+:   */
+/*   ft_core_type_pc.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kcorazon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/06/24 08:37:03 by kcorazon          #+#    #+#             */
-/*   Updated: 2020/06/24 08:37:04 by kcorazon         ###   ########.fr       */
+/*   Created: 2020/07/21 11:43:19 by kcorazon          #+#    #+#             */
+/*   Updated: 2020/07/21 11:43:21 by kcorazon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/ft_printf.h"
-#include "libft/libft.h"
+#include "ft_parser.h"
+#include "libft.h"
 
-void 	ft_write_s(va_list arg)
+int 	ft_print_type_pc(t_format_fields *format, va_list *arg)
 {
-	char 	*s;
+	int length;
 
-	s = va_arg(arg, char *);
-	ft_putstr_fd(s, 1);
+	length = 0;
+	ft_putchar_fd('%', 1);
+	return (length);
 }

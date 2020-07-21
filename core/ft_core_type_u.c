@@ -1,22 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_u_core.c                                        :+:      :+:    :+:   */
+/*   ft_core_type_u.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kcorazon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/06/24 09:21:21 by kcorazon          #+#    #+#             */
-/*   Updated: 2020/06/24 09:21:23 by kcorazon         ###   ########.fr       */
+/*   Created: 2020/07/21 11:28:42 by kcorazon          #+#    #+#             */
+/*   Updated: 2020/07/21 11:28:43 by kcorazon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/ft_printf.h"
-#include "libft/libft.h"
+#include "ft_parser.h"
+#include "libft.h"
 
-void 	ft_write_u(va_list arg)
+int 	ft_print_type_u(t_format_fields *format, va_list *arg)
 {
+	int length;
 	unsigned int	u;
 
-	u = va_arg(arg, unsigned int);
+	length = 0;
+	u = va_arg(*arg, unsigned int);
 	ft_putnbr_fd(u, 1);
+	return (length);
 }
