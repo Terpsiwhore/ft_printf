@@ -67,7 +67,6 @@ void				ft_putchar_fd(char c, int fd);
 void				ft_putstr_fd(char *s, int fd);
 void				ft_putendl_fd(char *s, int fd);
 void				ft_putnbr_fd(long int n, int fd);
-void				ft_putnbr_base_fd(long long n, int base, bool is_alpha, int fd);
 
 /*
 **	BONUS
@@ -83,5 +82,12 @@ void				ft_lstclear(t_list **lst, void (*del)(void*));
 void				ft_lstiter(t_list *lst, void (*f)(void *));
 t_list				*ft_lstmap(t_list *lst, void *(*f)(void *),
 								void (*del)(void *));
+
+/*
+**	CUSTOM F START HERE
+*/
+
+void				ft_putnbr_base_fd(long long n, int base, bool is_alpha, int fd);
+int					ft_nbrlen_base(size_t nbr, int base);
 
 #endif
