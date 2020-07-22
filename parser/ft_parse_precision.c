@@ -38,6 +38,8 @@ int 	ft_parse_precision(const char *str, t_format_fields *format, va_list *arg)
 			format->precision = precision;
 		}
 	}
+	else
+		format->precision = -1;
 	format->length += length;
 	return (length);
 }

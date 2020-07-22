@@ -21,9 +21,9 @@ int ft_parse_flags(const char *str, t_format_fields *format)
 	while (str[length])
 	{
 		if (str[length] == '-')
-			format->flags = format->flags | FLAG_MINU;
+			format->flags |= FLG_MINU;
 		else if (str[length] == '0')
-			format->flags = format->flags | FLAG_ZERO;
+			format->flags |= FLG_ZERO;
 		else
 			break ;
 		++length;

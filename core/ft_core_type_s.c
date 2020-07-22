@@ -18,11 +18,23 @@ int 	ft_print_type_s(t_format_fields *format, va_list *arg)
 	int		length;
 	char 	*s;
 
-	length = 0;
 	s = va_arg(*arg, char *);
 	if (s == NULL)
-		s = "(null)";
-	ft_putstr_fd(s, 1);
-
+		s = STR_NULL;
+	length = ft_strlen(s);
+	if (format->precision >= 0 && length > format->precision)
+		length = format->precision;
+	if (format->width == 0)
+		write(1, s, length);
+	else
+	{
+		if (!(format->flags & FLG_MINU))
+			while ((format->width)-- - length > 0)
+				ft_putchar_fd(' ', 1);
+		write(1, s, length);
+		if (format->flags & FLG_MINU)
+			while ((format->width)-- - length > 0)
+				ft_putchar_fd(' ', 1);
+	}
 	return (length);
 }

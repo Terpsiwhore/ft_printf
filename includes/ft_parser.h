@@ -2,8 +2,10 @@
 #ifndef FT_PARSER_H
 # define FT_PARSER_H
 
-# define FLAG_MINU 0b00000001u
-# define FLAG_ZERO 0b00000010u
+# define FLG_MINU (0b00000001u)
+# define FLG_ZERO (0b00000010u)
+
+# define STR_NULL ("(null)")
 
 # include <stdarg.h>
 # include <unistd.h>
@@ -11,10 +13,10 @@
 typedef struct		s_format_fields
 {
 	unsigned char	flags;
-	unsigned int	width;
+	int				width;
 	int				precision;
 	char			type;
-	unsigned int	length;
+	int				length;
 }					t_format_fields;
 
 t_format_fields		*ft_parser(const char *str, va_list *arg);
