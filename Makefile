@@ -46,7 +46,7 @@ OBJS		= $(PTF_OBJ) $(PRS_OBJ) $(COR_OBJ)
 all: $(NAME)
 
 $(NAME): $(OBJ_DIR) objs
-		@make -C $(LIB_DIR)
+		@make -s -C $(LIB_DIR)
 		@cp $(LIB_DIR)libft.a ./$(NAME)
 		@ar rc $(NAME) $(OBJS)
 		ranlib $(NAME)
@@ -58,28 +58,28 @@ $(OBJ_DIR):
 objs: $(PTF_OBJ) $(PRS_OBJ) $(COR_OBJ)
 
 $(PTF_OBJ): $(OBJ_DIR)%.o: %.c $(PTF_HDR)
-		$(CC) -I$(HDR_DIR) -I$(LIB_DIR)  $(FLAGS) -c $< -o $@
+		$(CC) -I $(HDR_DIR) -I $(LIB_DIR)  $(FLAGS) -c $< -o $@
 
 $(PRS_OBJ): $(OBJ_DIR)%.o: $(PRS_DIR)%.c $(PRS_HDR)
-		$(CC) -I$(HDR_DIR) -I$(LIB_DIR)  $(FLAGS) -c $< -o $@
+		$(CC) -I $(HDR_DIR) -I $(LIB_DIR)  $(FLAGS) -c $< -o $@
 
 $(COR_OBJ): $(OBJ_DIR)%.o: $(COR_DIR)%.c $(COR_HDR)
-		$(CC) -I$(HDR_DIR) -I$(LIB_DIR)  $(FLAGS) -c $< -o $@
+		$(CC) -I $(HDR_DIR) -I $(LIB_DIR)  $(FLAGS) -c $< -o $@
 
 #============================================================================================================================
 
 .PHONY: clean
 clean:
 	rm -rf $(OBJ_DIR)
-	@make -C $(LIB_DIR) clean
+	@make -s -C $(LIB_DIR) clean
 
 .PHONY: fclean
 fclean: clean
 		rm -rf $(NAME)
-		@make -C $(LIB_DIR) fclean
+		@make -s -C $(LIB_DIR) fclean
 
 .PHONY: re
 re: fclean all
-		@make -C $(LIB_DIR) re
+		@make -s -C $(LIB_DIR) re
 
 #============================================================================================================================
