@@ -28,6 +28,8 @@ int ft_parse_flags(const char *str, t_format_fields *format)
 			break ;
 		++length;
 	}
+	if ((format->flags & FLG_ZERO) && (format->flags & FLG_MINU))
+		format->flags &= (~FLG_ZERO);
 	format->length += length;
 	return (length);
 }

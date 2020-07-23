@@ -23,7 +23,11 @@ int 	ft_parse_width(const char *str, t_format_fields *format, va_list *arg)
 	if (*str == '*')
 	{
 		format->width = va_arg(*arg, int);
-		++format->length;
+		if (format->width < 0)
+		{
+			format->flags |= FLG_MINU;
+			format->width *= -1;
+		}
 		++length;
 	}
 	else
