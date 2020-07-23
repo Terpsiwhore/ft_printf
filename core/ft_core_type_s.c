@@ -13,28 +13,31 @@
 #include "ft_parser.h"
 #include "libft.h"
 
-int 	ft_print_type_s(t_format_fields *format, va_list *arg)
+int		ft_print_type_s(t_format_fields *format, va_list *arg)
 {
 	int		length;
-	char 	*s;
+	int		width;
+	char	*s;
 
 	s = va_arg(*arg, char *);
+	width = 0;
 	if (s == NULL)
 		s = STR_NULL;
 	length = ft_strlen(s);
 	if (format->precision >= 0 && length > format->precision)
 		length = format->precision;
-	if (format->width == 0)
-		write(1, s, length);
-	else
-	{
-		if (!(format->flags & FLG_MINU))
-			while ((format->width)-- - length > 0)
-				ft_putchar_fd(' ', 1);
-		write(1, s, length);
-		if (format->flags & FLG_MINU)
-			while ((format->width)-- - length > 0)
-				ft_putchar_fd(' ', 1);
-	}
-	return (length);
+	if (!(format->flags & FLG_MINU))
+		while ((format->width)-- - length > 0)
+		{
+			ft_putchar_fd(' ', 1);
+			++width;
+		}
+	write(1, s, length);
+	if (format->flags & FLG_MINU)
+		while ((format->width)-- - length > 0)
+		{
+			ft_putchar_fd(' ', 1);
+			++width;
+		}
+	return (length + width);
 }
