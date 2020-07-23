@@ -13,7 +13,8 @@
 #include "ft_parser.h"
 #include "libft.h"
 
-int 	ft_parse_precision(const char *str, t_format_fields *format, va_list *arg)
+int		ft_parse_precision(const char *str, t_format_fields *format,
+							va_list *arg)
 {
 	int	length;
 	int	precision;
@@ -22,8 +23,7 @@ int 	ft_parse_precision(const char *str, t_format_fields *format, va_list *arg)
 	precision = 0;
 	if (str[length] == '.')
 	{
-		++length;
-		if (str[length] == '*')
+		if (str[++length] == '*')
 		{
 			format->precision = va_arg(*arg, int);
 			++length;
@@ -31,10 +31,7 @@ int 	ft_parse_precision(const char *str, t_format_fields *format, va_list *arg)
 		else
 		{
 			while (ft_isdigit(str[length]))
-			{
-				precision = precision * 10 + (str[length] - '0');
-				++length;
-			}
+				precision = precision * 10 + (str[length++] - '0');
 			format->precision = precision;
 		}
 	}

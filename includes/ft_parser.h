@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_parser.h                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: kcorazon <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/07/23 09:10:33 by kcorazon          #+#    #+#             */
+/*   Updated: 2020/07/23 09:10:36 by kcorazon         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #ifndef FT_PARSER_H
 # define FT_PARSER_H
@@ -21,8 +32,10 @@ typedef struct		s_format_fields
 
 t_format_fields		*ft_parser(const char *str, va_list *arg);
 int					ft_parse_flags(const char *str, t_format_fields *format);
-int 				ft_parse_width(const char *str, t_format_fields *format, va_list *arg);
-int 				ft_parse_precision(const char *str, t_format_fields *format, va_list *arg);
+int					ft_parse_width(const char *str, t_format_fields *format,
+									va_list *arg);
+int					ft_parse_precision(const char *str, t_format_fields *format,
+									va_list *arg);
 int					ft_parse_type(const char *str, t_format_fields *format);
 
 #endif

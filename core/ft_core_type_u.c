@@ -22,36 +22,20 @@ int		ft_print_type_u(t_format_fields *format, va_list *arg)
 
 	width = 0;
 	u = va_arg(*arg, unsigned int);
-	if (format->precision == 0)
-		length = 0;
-	else
-		length = ft_nbrlen_base(u, 10);
+	length = (format->precision == 0 && u == 0) ? 0 : ft_nbrlen_base(u, 10);
 	precision = length > format->precision ? length : format->precision;
 	if (!(format->flags & FLG_MINU))
 	{
-		while ((format->width)-- - precision > 0)
-		{
-			ft_putchar_fd(format->flags & FLG_ZERO && format->precision < 0 ? '0' : ' ', 1);
-			++width;
-		}
+		if (format->flags & FLG_ZERO && format->precision < 0)
+			width += ft_putchar_n_fd('0', format->width - precision, 1);
+		else
+			width += ft_putchar_n_fd(' ', format->width - precision, 1);
 	}
 	if (format->precision - length > 0)
-	{
-		precision = format->precision;
-		while (precision-- - length > 0)
-		{
-			ft_putchar_fd('0', 1);
-			++width;
-		}
-	}
+		width += ft_putchar_n_fd('0', precision - length, 1);
 	if (length > 0)
 		ft_putnbr_fd(u, 1);
-	precision = length > format->precision ? length : format->precision;
 	if (format->flags & FLG_MINU)
-		while ((format->width)-- - precision > 0)
-		{
-			ft_putchar_fd(' ', 1);
-			++width;
-		}
+		width += ft_putchar_n_fd(' ', format->width - precision, 1);
 	return (length + width);
 }

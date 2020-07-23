@@ -1,33 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_parser.c                                        :+:      :+:    :+:   */
+/*   ft_putchar_n_fd.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kcorazon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/07/19 11:39:56 by kcorazon          #+#    #+#             */
-/*   Updated: 2020/07/19 11:39:58 by kcorazon         ###   ########.fr       */
+/*   Created: 2020/07/23 09:47:34 by kcorazon          #+#    #+#             */
+/*   Updated: 2020/07/23 09:47:35 by kcorazon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_parser.h"
 #include "libft.h"
 
-t_format_fields		*ft_parser(const char *str, va_list *arg)
+int		ft_putchar_n_fd(char c, int n, int fd)
 {
-	t_format_fields *format;
+	char length;
 
-	if ((format = malloc(sizeof(t_format_fields))))
+	length = 0;
+	while (n-- > 0)
 	{
-		format->length = 0;
-		str += ft_parse_flags(str, format);
-		str += ft_parse_width(str, format, arg);
-		str += ft_parse_precision(str, format, arg);
-		if (ft_parse_type(str, format) == 0)
-		{
-			free(format);
-			return (NULL);
-		}
+		write(fd, &c, 1);
+		++length;
 	}
-	return (format);
+	return (length);
 }

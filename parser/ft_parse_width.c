@@ -13,10 +13,10 @@
 #include "ft_parser.h"
 #include "libft.h"
 
-int 	ft_parse_width(const char *str, t_format_fields *format, va_list *arg)
+int		ft_parse_width(const char *str, t_format_fields *format, va_list *arg)
 {
-	int				length;
-	unsigned int	width;
+	int		length;
+	int		width;
 
 	length = 0;
 	width = 0;
@@ -33,10 +33,7 @@ int 	ft_parse_width(const char *str, t_format_fields *format, va_list *arg)
 	else
 	{
 		while (ft_isdigit(str[length]))
-		{
-			width = width * 10 + (str[length] - '0');
-			++length;
-		}
+			width = width * 10 + (str[length++] - '0');
 		format->width = width;
 	}
 	format->length += length;

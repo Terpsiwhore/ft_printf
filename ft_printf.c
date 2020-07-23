@@ -27,8 +27,7 @@ int			ft_printf(const char *str, ...)
 	{
 		while (*str && *str != '%')
 		{
-			ft_putchar_fd(*str, 1);
-			++str;
+			ft_putchar_fd(*str++, 1);
 			++length;
 		}
 		if (*str == '%')

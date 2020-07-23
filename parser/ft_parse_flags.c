@@ -12,7 +12,7 @@
 
 #include "ft_parser.h"
 
-int ft_parse_flags(const char *str, t_format_fields *format)
+int		ft_parse_flags(const char *str, t_format_fields *format)
 {
 	int length;
 
