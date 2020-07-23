@@ -10,19 +10,10 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "libft.h"
 #include "ft_printf.h"
 #include "ft_parser.h"
-
-static int 	ft_print_string_to_percent(const char *str)
-{
-	int length;
-
-	length = 0;
-	while (str[length] && str[length] != '%')
-		++length;
-	write(1, str, length);
-	return (length);
-}
+#include "ft_core.h"
 
 int			ft_printf(const char *str, ...)
 {
@@ -34,14 +25,19 @@ int			ft_printf(const char *str, ...)
 	length = 0;
 	while (*str)
 	{
-		length = ft_print_string_to_percent(str);
-		str += length;
+		while (*str && *str != '%')
+		{
+			ft_putchar_fd(*str, 1);
+			++str;
+			++length;
+		}
 		if (*str == '%')
 		{
 			++str;
 			if ((format = ft_parser(str, &arg)))
 			{
 				str += format->length;
+				length += ft_core(format, &arg);
 			}
 		}
 	}
