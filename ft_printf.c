@@ -38,6 +38,10 @@ int			ft_printf(const char *str, ...)
 				str += format->length;
 				length += ft_core(format, &arg);
 			}
+			else
+			{
+				//return
+			}
 		}
 	}
 	va_end(arg);

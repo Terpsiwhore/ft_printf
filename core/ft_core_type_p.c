@@ -17,17 +17,19 @@ int			ft_print_type_p(t_format_fields *format, va_list *arg)
 {
 	int		length;
 	int		width;
+	int		prfx_len;
 	size_t	p;
 
 	p = va_arg(*arg, size_t);
 	width = 0;
-	length = ft_nbrlen_base(p, 16) + 2;
+	prfx_len = ft_strlen(STR_HEX);
+	length = ft_nbrlen_base(p, BASE_16) + prfx_len;
 	if (!(format->flags & FLG_MINU))
 		width += ft_putchar_n_fd(' ', format->width - length, 1);
-	ft_putstr_fd("0x", 1);
-	if (format->precision - length + 2 > 0)
-		width += ft_putchar_n_fd('0', format->precision - length + 2, 1);
-	ft_putnbr_base_fd(p, 16, 0, 1);
+	ft_putstr_fd(STR_HEX, 1);
+	if (format->precision - length + prfx_len > 0)
+		width += ft_putchar_n_fd('0', format->precision - length + prfx_len, 1);
+	ft_putnbr_base_fd(p, BASE_16, 0, 1);
 	if (format->flags & FLG_MINU)
 		width += ft_putchar_n_fd(' ', format->width - length, 1);
 	return (length + width);

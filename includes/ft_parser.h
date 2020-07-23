@@ -17,6 +17,10 @@
 # define FLG_ZERO (0b00000010u)
 
 # define STR_NULL ("(null)")
+# define STR_HEX ("0x")
+
+# define BASE_10 (10u)
+# define BASE_16 (16u)
 
 # include <stdarg.h>
 # include <unistd.h>

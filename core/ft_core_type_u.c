@@ -22,7 +22,7 @@ int		ft_print_type_u(t_format_fields *format, va_list *arg)
 
 	width = 0;
 	u = va_arg(*arg, unsigned int);
-	length = (format->precision == 0 && u == 0) ? 0 : ft_nbrlen_base(u, 10);
+	length = (!(format->precision) && !u) ? 0 : ft_nbrlen_base(u, BASE_10);
 	precision = length > format->precision ? length : format->precision;
 	if (!(format->flags & FLG_MINU))
 	{

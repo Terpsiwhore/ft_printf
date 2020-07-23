@@ -90,6 +90,6 @@ t_list				*ft_lstmap(t_list *lst, void *(*f)(void *),
 int					ft_putchar_n_fd(char c, int n, int fd);
 void				ft_putnbr_base_fd(long long n, int base, bool is_alpha,
 								int fd);
-int					ft_nbrlen_base(long nbr, int base);
+int					ft_nbrlen_base(long nbr, unsigned int base);
 
 #endif

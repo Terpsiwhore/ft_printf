@@ -41,6 +41,7 @@
 *.su
 *.idb
 *.pdb
+pft/
 test*
 
 # Kernel Module Compile Results
@@ -59,4 +60,3 @@ CMake*
 
 # Mac files
 .DS_Store
-pft/

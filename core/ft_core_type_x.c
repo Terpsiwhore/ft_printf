@@ -22,7 +22,7 @@ int		ft_print_type_x(t_format_fields *format, va_list *arg, bool is_upper)
 
 	width = 0;
 	x = va_arg(*arg, unsigned int);
-	length = (format->precision == 0 && x == 0) ? 0 : ft_nbrlen_base(x, 16);
+	length = (!(format->precision) && !x) ? 0 : ft_nbrlen_base(x, BASE_16);
 	precision = length > format->precision ? length : format->precision;
 	if (!(format->flags & FLG_MINU))
 	{
@@ -34,7 +34,7 @@ int		ft_print_type_x(t_format_fields *format, va_list *arg, bool is_upper)
 	if (format->precision - length > 0)
 		width += ft_putchar_n_fd('0', precision - length, 1);
 	if (length > 0)
-		ft_putnbr_base_fd(x, 16, is_upper, 1);
+		ft_putnbr_base_fd(x, BASE_16, is_upper, 1);
 	if (format->flags & FLG_MINU)
 		width += ft_putchar_n_fd(' ', format->width - precision, 1);
 	return (length + width);
