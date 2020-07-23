@@ -27,17 +27,9 @@ int		ft_print_type_s(t_format_fields *format, va_list *arg)
 	if (format->precision >= 0 && length > format->precision)
 		length = format->precision;
 	if (!(format->flags & FLG_MINU))
-		while ((format->width)-- - length > 0)
-		{
-			ft_putchar_fd(' ', 1);
-			++width;
-		}
+		width += ft_putchar_n_fd(' ', format->width - length, 1);
 	write(1, s, length);
 	if (format->flags & FLG_MINU)
-		while ((format->width)-- - length > 0)
-		{
-			ft_putchar_fd(' ', 1);
-			++width;
-		}
+		width += ft_putchar_n_fd(' ', format->width - length, 1);
 	return (length + width);
 }

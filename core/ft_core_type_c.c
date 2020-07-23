@@ -21,11 +21,9 @@ int		ft_print_type_c(t_format_fields *format, va_list *arg)
 	c = va_arg(*arg, int);
 	length = format->width > 0 ? format->width : 1;
 	if (!(format->flags & FLG_MINU))
-		while ((format->width)-- - 1 > 0)
-			ft_putchar_fd(' ', 1);
+		ft_putchar_n_fd(' ', format->width - 1, 1);
 	ft_putchar_fd(c, 1);
 	if (format->flags & FLG_MINU)
-		while ((format->width)-- - 1 > 0)
-			ft_putchar_fd(' ', 1);
+		ft_putchar_n_fd(' ', format->width - 1, 1);
 	return (length);
 }
