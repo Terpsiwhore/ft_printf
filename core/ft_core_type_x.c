@@ -13,13 +13,45 @@
 #include "ft_parser.h"
 #include "libft.h"
 
-int 	ft_print_type_x(t_format_fields *format, va_list *arg, bool is_upper)
+int		ft_print_type_x(t_format_fields *format, va_list *arg, bool is_upper)
 {
-	int length;
-	int	x;
+	int				length;
+	int				width;
+	int				precision;
+	unsigned int	x;
 
-	length = 0;
-	x = va_arg(*arg, int);
-	ft_putnbr_base_fd(x, 16, is_upper, 1);
-	return (length);
+	width = 0;
+	x = va_arg(*arg, unsigned int);
+	if (format->precision == 0)
+		length = 0;
+	else
+		length = ft_nbrlen_base(x, 16);
+	precision = length > format->precision ? length : format->precision;
+	if (!(format->flags & FLG_MINU))
+	{
+		while ((format->width)-- - precision > 0)
+		{
+			ft_putchar_fd(format->flags & FLG_ZERO && format->precision < 0 ? '0' : ' ', 1);
+			++width;
+		}
+	}
+	if (format->precision - length > 0)
+	{
+		precision = format->precision;
+		while (precision-- - length > 0)
+		{
+			ft_putchar_fd('0', 1);
+			++width;
+		}
+	}
+	if (length > 0)
+		ft_putnbr_base_fd(x, 16, is_upper, 1);
+	precision = length > format->precision ? length : format->precision;
+	if (format->flags & FLG_MINU)
+		while ((format->width)-- - precision > 0)
+		{
+			ft_putchar_fd(' ', 1);
+			++width;
+		}
+	return (length + width);
 }
