@@ -19,14 +19,14 @@ t_format_fields		*ft_parser(const char *str, va_list *arg)
 
 	if ((format = malloc(sizeof(t_format_fields))))
 	{
-		format->length = 0;
+		ft_bzero(format, sizeof(t_format_fields));
 		str += ft_parse_flags(str, format);
 		str += ft_parse_width(str, format, arg);
 		str += ft_parse_precision(str, format, arg);
 		if (ft_parse_type(str, format) == 0)
 		{
 			free(format);
-			return (NULL);
+			format = NULL;
 		}
 	}
 	return (format);

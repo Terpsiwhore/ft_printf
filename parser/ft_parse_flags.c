@@ -17,7 +17,6 @@ int		ft_parse_flags(const char *str, t_format_fields *format)
 	int length;
 
 	length = 0;
-	format->flags = 0;
 	while (str[length])
 	{
 		if (str[length] == '-')
