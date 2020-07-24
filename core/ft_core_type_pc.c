@@ -18,6 +18,6 @@ int		ft_print_type_pc(t_format_fields *format, va_list *arg)
 	int length;
 
 	length = 1;
-	ft_putchar_fd('%', 1);
+	ft_putchar_fd('%', STDOUT);
 	return (length);
 }

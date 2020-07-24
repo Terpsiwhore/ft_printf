@@ -27,15 +27,15 @@ int		ft_print_type_x(t_format_fields *format, va_list *arg, bool is_upper)
 	if (!(format->flags & FLAG_MINUS))
 	{
 		if (format->flags & FLAG_ZERO && format->precision < 0)
-			width += ft_putchar_n_fd('0', format->width - precision, 1);
+			width += ft_putcharn_fd('0', format->width - precision, STDOUT);
 		else
-			width += ft_putchar_n_fd(' ', format->width - precision, 1);
+			width += ft_putcharn_fd(' ', format->width - precision, STDOUT);
 	}
 	if (format->precision - length > 0)
-		width += ft_putchar_n_fd('0', precision - length, 1);
+		width += ft_putcharn_fd('0', precision - length, STDOUT);
 	if (length > 0)
 		ft_putnbr_base_fd(x, 16, is_upper, 1);
 	if (format->flags & FLAG_MINUS)
-		width += ft_putchar_n_fd(' ', format->width - precision, 1);
+		width += ft_putcharn_fd(' ', format->width - precision, STDOUT);
 	return (length + width);
 }
