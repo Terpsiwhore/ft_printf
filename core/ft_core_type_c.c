@@ -19,11 +19,11 @@ int		ft_print_type_c(t_format_fields *format, va_list *arg)
 	char	c;
 
 	c = va_arg(*arg, int);
-	length = format->width > 0 ? format->width : 1;
-	if (!(format->flags & FLG_MINU))
+	length = format->width > 0 ? (int) format->width : 1;
+	if (!(format->flags & FLAG_MINUS))
 		ft_putchar_n_fd(' ', format->width - 1, 1);
 	ft_putchar_fd(c, 1);
-	if (format->flags & FLG_MINU)
+	if (format->flags & FLAG_MINUS)
 		ft_putchar_n_fd(' ', format->width - 1, 1);
 	return (length);
 }

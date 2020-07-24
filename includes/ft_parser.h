@@ -13,14 +13,11 @@
 #ifndef FT_PARSER_H
 # define FT_PARSER_H
 
-# define FLG_MINU (0b00000001u)
-# define FLG_ZERO (0b00000010u)
+# define FLAG_MINUS		(0b00000001u)
+# define FLAG_ZERO 		(0b00000010u)
 
-# define STR_NULL ("(null)")
-# define STR_HEX ("0x")
-
-# define BASE_10 (10u)
-# define BASE_16 (16u)
+# define STR_NULL		("(null)")
+# define STR_HEX_PREFIX	("0x")
 
 # include <stdarg.h>
 # include <unistd.h>

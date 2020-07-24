@@ -21,15 +21,15 @@ int		ft_parse_flags(const char *str, t_format_fields *format)
 	while (str[length])
 	{
 		if (str[length] == '-')
-			format->flags |= FLG_MINU;
+			format->flags |= FLAG_MINUS;
 		else if (str[length] == '0')
-			format->flags |= FLG_ZERO;
+			format->flags |= FLAG_ZERO;
 		else
 			break ;
 		++length;
 	}
-	if ((format->flags & FLG_ZERO) && (format->flags & FLG_MINU))
-		format->flags &= (~FLG_ZERO);
+	if ((format->flags & FLAG_ZERO) && (format->flags & FLAG_MINUS))
+		format->flags &= (~FLAG_ZERO);
 	format->length += length;
 	return (length);
 }

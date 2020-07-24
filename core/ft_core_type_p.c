@@ -22,15 +22,15 @@ int			ft_print_type_p(t_format_fields *format, va_list *arg)
 
 	p = va_arg(*arg, size_t);
 	width = 0;
-	prfx_len = ft_strlen(STR_HEX);
-	length = ft_nbrlen_base(p, BASE_16) + prfx_len;
-	if (!(format->flags & FLG_MINU))
+	prfx_len = ft_strlen(STR_HEX_PREFIX);
+	length = ft_nbrlen_base(p, 16) + prfx_len;
+	if (!(format->flags & FLAG_MINUS))
 		width += ft_putchar_n_fd(' ', format->width - length, 1);
-	ft_putstr_fd(STR_HEX, 1);
+	ft_putstr_fd(STR_HEX_PREFIX, 1);
 	if (format->precision - length + prfx_len > 0)
 		width += ft_putchar_n_fd('0', format->precision - length + prfx_len, 1);
-	ft_putnbr_base_fd(p, BASE_16, 0, 1);
-	if (format->flags & FLG_MINU)
+	ft_putnbr_base_fd(p, 16, 0, 1);
+	if (format->flags & FLAG_MINUS)
 		width += ft_putchar_n_fd(' ', format->width - length, 1);
 	return (length + width);
 }

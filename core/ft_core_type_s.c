@@ -26,10 +26,10 @@ int		ft_print_type_s(t_format_fields *format, va_list *arg)
 	length = ft_strlen(s);
 	if (format->precision >= 0 && length > format->precision)
 		length = format->precision;
-	if (!(format->flags & FLG_MINU))
+	if (!(format->flags & FLAG_MINUS))
 		width += ft_putchar_n_fd(' ', format->width - length, 1);
 	write(1, s, length);
-	if (format->flags & FLG_MINU)
+	if (format->flags & FLAG_MINUS)
 		width += ft_putchar_n_fd(' ', format->width - length, 1);
 	return (length + width);
 }
