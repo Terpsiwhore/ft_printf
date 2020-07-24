@@ -16,25 +16,25 @@
 int		ft_parse_width(const char *str, t_format_fields *format, va_list *arg)
 {
 	int		length;
-	int		width;
 
 	length = 0;
-	width = 0;
 	if (*str == '*')
 	{
 		format->width = va_arg(*arg, int);
 		if (format->width < 0)
 		{
-			format->flags |= FLG_MINU;
+			format->flags |= FLAG_MINUS;
+			if ((format->flags & FLAG_ZERO) && (format->flags & FLAG_MINUS))
+				format->flags &= (~FLAG_ZERO);
 			format->width *= -1;
 		}
 		++length;
 	}
-	else
+	else if (ft_isdigit(*str))
 	{
-		while (ft_isdigit(str[length]))
-			width = width * 10 + (str[length++] - '0');
-		format->width = width;
+		format->width = ft_atoi(str);
+		while (ft_isdigit(*(str + length)))
+			++length;
 	}
 	format->length += length;
 	return (length);

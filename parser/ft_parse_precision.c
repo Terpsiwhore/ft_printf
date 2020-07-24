@@ -17,23 +17,23 @@ int		ft_parse_precision(const char *str, t_format_fields *format,
 							va_list *arg)
 {
 	int	length;
-	int	precision;
 
 	length = 0;
-	precision = 0;
-	if (str[length] == '.')
+	if (*str == '.')
 	{
-		if (str[++length] == '*')
+		++str;
+		if (*str == '*')
 		{
 			format->precision = va_arg(*arg, int);
 			++length;
 		}
-		else
+		else if (ft_isdigit(*str))
 		{
-			while (ft_isdigit(str[length]))
-				precision = precision * 10 + (str[length++] - '0');
-			format->precision = precision;
+			format->precision = ft_atoi(str);
+			while (ft_isdigit(*(str + length)))
+				++length;
 		}
+		++length;
 	}
 	else
 		format->precision = -1;
