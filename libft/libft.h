@@ -13,6 +13,8 @@
 #ifndef LIBFT_H
 # define LIBFT_H
 
+# define STDOUT 1
+
 # include <stdlib.h>
 # include <unistd.h>
 # include <stdbool.h>
@@ -87,7 +89,7 @@ t_list				*ft_lstmap(t_list *lst, void *(*f)(void *),
 **	CUSTOM F START HERE
 */
 
-int					ft_putchar_n_fd(char c, int n, int fd);
+int					ft_putcharn_fd(char c, int n, int fd);
 void				ft_putnbr_base_fd(long long n, int base, bool is_alpha,
 								int fd);
 int					ft_nbrlen_base(long nbr, unsigned int base);

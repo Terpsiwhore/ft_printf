@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putchar_n_fd.c                                  :+:      :+:    :+:   */
+/*   ft_putcharn_fd.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kcorazon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,7 +12,7 @@
 
 #include "libft.h"
 
-int		ft_putchar_n_fd(char c, int n, int fd)
+int		ft_putcharn_fd(char c, int n, int fd)
 {
 	char length;
 
