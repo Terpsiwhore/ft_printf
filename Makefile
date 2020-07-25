@@ -47,7 +47,7 @@ all: $(NAME)
 
 $(NAME): $(OBJ_DIR) objs
 		@make -s -C $(LIB_DIR)
-		@cp $(LIB_DIR)libft.a ./$(NAME)
+		@cp $(LIB_DIR)libft.a $(NAME)
 		@ar rc $(NAME) $(OBJS)
 		ranlib $(NAME)
 
