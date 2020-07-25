@@ -11,39 +11,44 @@
 /* ************************************************************************** */
 
 #include "libft.h"
-#include "ft_printf.h"
 #include "ft_parser.h"
 #include "ft_core.h"
 
-int			ft_printf(const char *str, ...)
+static void		ft_print_string(const char *str, va_list *arg, int *length)
 {
-	va_list			arg;
-	t_format_fields *format;
-	int				length;
+	t_format_fields	*format;
 
-	va_start(arg, str);
-	length = 0;
 	while (*str)
 	{
 		while (*str && *str != '%')
 		{
-			ft_putchar_fd(*str++, 1);
-			++length;
+			ft_putchar_fd(*str++, STDOUT);
+			++(*length);
 		}
 		if (*str == '%')
 		{
-			++str;
-			if ((format = ft_parser(str, &arg)))
+			if ((format = ft_parser(++str, arg)))
 			{
 				str += format->length;
-				length += ft_core(format, &arg);
+				*length += ft_core(format, arg);
 			}
 			else
 			{
-				//return
+				*length = -1;
+				break ;
 			}
 		}
 	}
+}
+
+int				ft_printf(const char *str, ...)
+{
+	va_list	arg;
+	int		length;
+
+	length = 0;
+	va_start(arg, str);
+	ft_print_string(str, &arg, &length);
 	va_end(arg);
 	return (length);
 }
