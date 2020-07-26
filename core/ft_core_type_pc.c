@@ -13,11 +13,20 @@
 #include "ft_parser.h"
 #include "libft.h"
 
-int		ft_print_type_pc(t_format_fields *format, va_list *arg)
+int ft_print_type_pc(t_format_fields *format, va_list *arg)
 {
 	int length;
 
-	length = 1;
+	length = format->width > 0 ? (int)format->width : 1;
+	if (!(format->flags & FLAG_MINUS))
+	{
+		if (format->flags & FLAG_ZERO)
+			length += ft_putcharn_fd('0', format->width - 1, STDOUT);
+		else
+			length += ft_putcharn_fd(' ', format->width - 1, STDOUT);
+	}
 	ft_putchar_fd('%', STDOUT);
+	if (format->flags & FLAG_MINUS)
+		ft_putcharn_fd(' ', format->width - 1, STDOUT);
 	return (length);
 }
