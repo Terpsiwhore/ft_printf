@@ -13,7 +13,7 @@
 #include "ft_parser.h"
 #include "libft.h"
 
-int ft_print_type_pc(t_format_fields *format, va_list *arg)
+int ft_print_type_pc(t_format_fields *format)
 {
 	int length;
 
