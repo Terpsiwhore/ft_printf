@@ -15,9 +15,9 @@
 
 int			ft_print_type_p(t_format_fields *format, va_list *arg)
 {
-	int	len;
-	int	wdth;
-	int	pfx_len;
+	int		len;
+	int		wdth;
+	int		pfx_len;
 	size_t	p;
 
 	p = va_arg(*arg, size_t);
