@@ -18,7 +18,7 @@ int		ft_parse_type(const char *str, t_format_fields *format)
 	char *types;
 
 	types = "cspdiuxX%";
-	if (ft_strchr(types, *str))
+	if (*str && ft_strchr(types, *str))
 	{
 		format->type = *str;
 		++(format->length);
