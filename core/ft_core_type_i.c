@@ -62,6 +62,8 @@ int				ft_print_type_i(t_format_fields *format, va_list *arg)
 	width += ft_print_prefix_flags(format, &i, is_neg, prc);
 	if (format->precision - length > 0)
 		width += ft_putcharn_fd('0', prc - length, STDOUT);
+	if (i < 0)
+		width += is_neg;
 	if (length > 0)
 		ft_putnbr_fd(i, STDOUT);
 	if (format->flags & FLAG_MINUS)

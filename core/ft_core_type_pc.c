@@ -21,9 +21,9 @@ int ft_print_type_pc(t_format_fields *format)
 	if (!(format->flags & FLAG_MINUS))
 	{
 		if (format->flags & FLAG_ZERO)
-			length += ft_putcharn_fd('0', format->width - 1, STDOUT);
+			ft_putcharn_fd('0', format->width - 1, STDOUT);
 		else
-			length += ft_putcharn_fd(' ', format->width - 1, STDOUT);
+			ft_putcharn_fd(' ', format->width - 1, STDOUT);
 	}
 	ft_putchar_fd('%', STDOUT);
 	if (format->flags & FLAG_MINUS)
