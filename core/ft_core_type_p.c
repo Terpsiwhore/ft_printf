@@ -27,7 +27,7 @@ int			ft_print_type_p(t_format_fields *format, va_list *arg)
 	if (!(format->flags & FLAG_MINUS))
 		wdth += ft_putcharn_fd(' ', format->width - len, STDOUT);
 	ft_putstr_fd(STR_HEX_PREFIX, STDOUT);
-	if (format->precision - len + pfx_len > 0)
+	if (len > 0 && format->precision - len + pfx_len > 0)
 		wdth += ft_putcharn_fd('0', format->precision - len + pfx_len, STDOUT);
 	if (len > 0)
 		ft_putnbr_base_fd(p, 16, 0, STDOUT);
