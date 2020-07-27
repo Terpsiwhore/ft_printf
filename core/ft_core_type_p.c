@@ -15,23 +15,23 @@
 
 int			ft_print_type_p(t_format_fields *format, va_list *arg)
 {
-	int		len;
-	int		wdth;
-	int		pfx_len;
+	int	len;
+	int	wdth;
+	int	pfx_len;
 	size_t	p;
 
 	p = va_arg(*arg, size_t);
 	wdth = 0;
 	pfx_len = ft_strlen(STR_HEX_PREFIX);
-	len = (!(format->precision) && !p) ? 0 : ft_nbrlen_base(p, 16) + pfx_len;
+	len = (!(format->precision) && !p) ? 0 : ft_nbrlen_base(p, 16);
 	if (!(format->flags & FLAG_MINUS))
-		wdth += ft_putcharn_fd(' ', format->width - len, STDOUT);
+		wdth += ft_putcharn_fd(' ', format->width - len - pfx_len, STDOUT);
 	ft_putstr_fd(STR_HEX_PREFIX, STDOUT);
-	if (len > 0 && format->precision - len + pfx_len > 0)
-		wdth += ft_putcharn_fd('0', format->precision - len + pfx_len, STDOUT);
+	if (format->precision - len > 0)
+		wdth += ft_putcharn_fd('0', format->precision - len, STDOUT);
 	if (len > 0)
 		ft_putnbr_base_fd(p, 16, 0, STDOUT);
 	if (format->flags & FLAG_MINUS)
-		wdth += ft_putcharn_fd(' ', format->width - len, 1);
-	return (len + wdth);
+		wdth += ft_putcharn_fd(' ', format->width - len - pfx_len, STDOUT);
+	return (len + wdth + pfx_len);
 }
