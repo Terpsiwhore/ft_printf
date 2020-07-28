@@ -17,12 +17,18 @@ int		ft_parse_flags(const char *str, t_format_fields *format)
 	int length;
 
 	length = 0;
-	while (str[length])
+	while (*(str + length))
 	{
-		if (str[length] == '-')
+		if (*(str + length) == '-')
 			format->flags |= FLAG_MINUS;
-		else if (str[length] == '0')
+		else if (*(str + length) == '0')
 			format->flags |= FLAG_ZERO;
+		else if (*(str + length) == '+')
+			format->flags |= FLAG_PLUS;
+		else if (*(str + length) == ' ')
+			format->flags |= FLAG_SPACE;
+		else if (*(str + length) == '#')
+			format->flags |= FLAG_HASH;
 		else
 			break ;
 		++length;

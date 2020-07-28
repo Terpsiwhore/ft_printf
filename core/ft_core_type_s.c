@@ -28,7 +28,7 @@ int		ft_print_type_s(t_format_fields *format, va_list *arg)
 		length = format->precision;
 	if (!(format->flags & FLAG_MINUS))
 		width += ft_putcharn_fd(' ', format->width - length, STDOUT);
-	write(1, s, length);
+	write(STDOUT, s, length);
 	if (format->flags & FLAG_MINUS)
 		width += ft_putcharn_fd(' ', format->width - length, STDOUT);
 	return (length + width);
