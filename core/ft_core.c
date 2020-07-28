@@ -12,7 +12,7 @@
 
 #include "ft_core.h"
 
-int		ft_core(t_format_fields *format, va_list *arg)
+int		ft_core(t_format_fields *format, va_list *arg, int printf_length)
 {
 	int	length;
 
@@ -31,6 +31,8 @@ int		ft_core(t_format_fields *format, va_list *arg)
 		length = ft_print_type_x(format, arg, format->type == 'X');
 	else if (format->type == '%')
 		length = ft_print_type_pc(format, arg);
+	else if (format->type == 'n')
+		length = ft_set_pointer_n(arg, printf_length);
 	free(format);
 	return (length);
 }

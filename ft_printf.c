@@ -30,7 +30,7 @@ static void		ft_print_string(const char *str, va_list *arg, int *length)
 			if ((format = ft_parser(++str, arg)))
 			{
 				str += format->length;
-				*length += ft_core(format, arg);
+				*length += ft_core(format, arg, *length);
 			}
 			else
 			{

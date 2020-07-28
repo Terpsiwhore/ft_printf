@@ -1,25 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_parse_type.c                                    :+:      :+:    :+:   */
+/*   ft_core_type_n.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kcorazon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/07/21 09:04:56 by kcorazon          #+#    #+#             */
-/*   Updated: 2020/07/21 09:04:58 by kcorazon         ###   ########.fr       */
+/*   Created: 2020/07/28 11:16:28 by kcorazon          #+#    #+#             */
+/*   Updated: 2020/07/28 11:16:31 by kcorazon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_parser.h"
-#include "libft.h"
 
-int		ft_parse_type(const char *str, t_format_fields *format)
+int		ft_set_pointer_n(va_list *arg, int printf_length)
 {
-	if (*str && ft_strchr("cspdiuxX%n", *str))
-	{
-		format->type = *str;
-		++(format->length);
-		return (1);
-	}
+	int 	*n;
+
+	n = va_arg(*arg, int *);
+	*n = printf_length;
 	return (0);
 }
