@@ -23,30 +23,7 @@ static void		ft_print_sign(t_format_fields *format, long i)
 		ft_putchar_fd(' ', STDOUT);
 }
 
-static int		ft_print_prefix_flags(t_format_fields *format, bool is_sign,
-										long i, int prc)
-{
-	int		width;
-
-	width = 0;
-	if (!(format->flags & FLAG_MINUS))
-	{
-		if (format->flags & FLAG_ZERO && format->precision < 0)
-		{
-			ft_print_sign(format, i);
-			width += ft_putcharn_fd('0', format->width - prc - is_sign, STDOUT);
-		}
-		else
-			width += ft_putcharn_fd(' ', format->width - prc - is_sign, STDOUT);
-		if (format->flags & FLAG_ZERO && format->precision > 0)
-			ft_print_sign(format, i);
-	}
-	if (!(format->flags & FLAG_ZERO))
-		ft_print_sign(format, i);
-	return (width);
-}
-
-int				ft_print_type_i(t_format_fields *format, va_list *arg)
+int				ft_print_type_i(t_format_fields *f, va_list *arg)
 {
 	int		length;
 	int		width;
@@ -56,20 +33,21 @@ int				ft_print_type_i(t_format_fields *format, va_list *arg)
 
 	width = 0;
 	i = va_arg(*arg, int);
-	is_sign = i < 0 || format->flags & FLAG_PLUS || format->flags & FLAG_SPACE;
-	length = (!(format->precision) && !i) ? 0 : ft_nbrlen_base(i, 10);
-	prc = length > format->precision ? length : format->precision;
-	width += ft_print_prefix_flags(format, is_sign, i, prc);
-	if (format->precision - length > 0)
-		width += ft_putcharn_fd('0', prc - length, STDOUT);
-	if (i < 0)
+	is_sign = i < 0 || f->flags & FLAG_PLUS || f->flags & FLAG_SPACE;
+	length = (!(f->precision) && !i) ? 0 : ft_nbrlen_base(i, 10);
+	prc = length > f->precision ? length : f->precision;
+	f->flags &= f->flags & FLAG_ZERO && f->precision > 0 ? (~FLAG_ZERO) : ~0u;
+	if (!(f->flags & FLAG_MINUS))
 	{
-		i *= -1;
-		is_sign = 1;
+		f->flags & FLAG_ZERO ? ft_print_sign(f, i) : 0;
+		width += ft_putcharn_fd(f->flags & FLAG_ZERO ? '0' : ' ',
+				f->width - prc - is_sign, STDOUT);
 	}
-	if (length > 0)
-		ft_putnbr_fd(i, STDOUT);
-	if (format->flags & FLAG_MINUS)
-		width += ft_putcharn_fd(' ', format->width - prc - is_sign, STDOUT);
+	!(f->flags & FLAG_ZERO) ? ft_print_sign(f, i) : 0;
+	f->precision - length > 0 ? width += ft_putcharn_fd('0',
+			prc - length, STDOUT) : 0;
+	length > 0 ? ft_putnbr_fd(i * (1 - 2 * is_sign), STDOUT) : 0;
+	f->flags & FLAG_MINUS ? width += ft_putcharn_fd(' ',
+			f->width - prc - is_sign, STDOUT) : 0;
 	return (length + width + is_sign);
 }
